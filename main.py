@@ -19,10 +19,10 @@ async def on_voice_state_update(member, before, after):
     if channel is not None:
         if after.channel is not None and before.channel is None:
             # Пользователь зашел в голосовой канал
-            await channel.send('Кто-то пришел')
+            await channel.send(f'{member.name} зашел в голосовой канал {after.channel.name}')
         elif after.channel is None and before.channel is not None:
             # Пользователь покинул голосовой канал
-            await channel.send('Кто-то ушел')
+            await channel.send(f'{member.name} покинул голосовой канал {before.channel.name}')
 
 # Событие при запуске бота
 @bot.event
