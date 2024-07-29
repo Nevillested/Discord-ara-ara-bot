@@ -29,5 +29,19 @@ async def on_voice_state_update(member, before, after):
 async def on_ready():
     print(f'Мы вошли как {bot.user}')
 
-# Запуск бота
-bot.run(config.token)
+#могут быть ошибки связи с сервером, поэтому бот будет перезапускаться каждый раз при ошибках
+def start_bot():
+    while True:
+
+        try:
+            print('Запуск бота')
+            bot.run(config.token)
+
+        except:
+
+            print('Произошла ошибка, логируемся.')
+            queries_to_bd.save_error(str(traceback.format_exc()))
+            time.sleep(5)
+
+#запускаем бота
+start_bot()
